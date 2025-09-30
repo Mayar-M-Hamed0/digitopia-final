@@ -1,13 +1,13 @@
 @extends('layouts.master')
 @section('title')
-    الوحدات الصحية
+    مديري الوحدات الصحية
 @endsection
 @section('page-header')
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
         <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-            إدارة الوحدات الصحية
+            إدارة مديري الوحدات الصحية
         </h1>
         <!--end::Title-->
         <!--begin::Breadcrumb-->
@@ -23,7 +23,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-dark">الوحدات الصحية</li>
+            <li class="breadcrumb-item text-dark">مديري الوحدات الصحية</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -47,7 +47,7 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                             </i>
-                            <input type="text" data-kt-health-center-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="البحث في الوحدات الصحية"/>
+                            <input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="البحث في المديرين"/>
                         </div>
                         <!--end::Search-->
                     </div>
@@ -55,51 +55,13 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end" data-kt-health-center-table-toolbar="base">
-                            <!--begin::Filter-->
-                            <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                <i class="ki-duotone ki-filter fs-2"></i>
-                                تصفية
-                            </button>
-                            <!--begin::Menu 1-->
-                            <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
-                                <!--begin::Header-->
-                                <div class="px-7 py-5">
-                                    <div class="fs-5 text-dark fw-bold">خيارات التصفية</div>
-                                </div>
-                                <!--end::Header-->
-                                <!--begin::Separator-->
-                                <div class="separator border-gray-200"></div>
-                                <!--end::Separator-->
-                                <!--begin::Content-->
-                                <div class="px-7 py-5" data-kt-health-center-table-filter="form">
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <label class="form-label fs-6 fw-semibold">الحالة:</label>
-                                        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="اختر الحالة" data-allow-clear="true" data-kt-health-center-table-filter="status">
-                                            <option></option>
-                                            <option value="active">نشط</option>
-                                            <option value="inactive">غير نشط</option>
-                                        </select>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Actions-->
-                                    <div class="d-flex justify-content-end">
-                                        <button type="reset" class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6" data-kt-menu-dismiss="true" data-kt-health-center-table-filter="reset">إعادة تعيين</button>
-                                        <button type="submit" class="btn btn-primary fw-semibold px-6" data-kt-menu-dismiss="true" data-kt-health-center-table-filter="filter">تطبيق</button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </div>
-                                <!--end::Content-->
-                            </div>
-                            <!--end::Menu 1-->
-                            <!--end::Filter-->
-                            <!--begin::Add health center-->
-                            <a href="{{ route('admin.health-centers.create') }}" class="btn btn-primary">
+                        <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                            <!--begin::Add manager-->
+                            <a href="{{ route('admin.health-center-managers.create') }}" class="btn btn-primary">
                                 <i class="ki-duotone ki-plus fs-2"></i>
-                                إضافة وحدة صحية جديدة
+                                إضافة مدير جديد
                             </a>
-                            <!--end::Add health center-->
+                            <!--end::Add manager-->
                         </div>
                         <!--end::Toolbar-->
                     </div>
@@ -108,7 +70,7 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    
+
                     @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}
@@ -125,86 +87,86 @@
 
                     <!--begin::Table-->
                     <div class="table-responsive">
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_health_centers_table">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
                             <!--begin::Table head-->
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">#</th>
-                                    <th class="min-w-250px">اسم الوحدة الصحية</th>
-                                    <th class="min-w-200px">الموقع</th>
+                                    <th class="min-w-200px">الاسم الكامل</th>
+                                    <th class="min-w-150px">البريد الإلكتروني</th>
                                     <th class="min-w-150px">رقم الهاتف</th>
-                                    <th class="min-w-100px">الجرعات المتاحة</th>
-                                    <th class="min-w-100px">المدير</th>
+                                    <th class="min-w-200px">الوحدة الصحية</th>
                                     <th class="min-w-100px">الحالة</th>
+                                    <th class="min-w-150px">تاريخ الإنشاء</th>
                                     <th class="text-end min-w-100px">الإجراءات</th>
                                 </tr>
                             </thead>
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody class="fw-semibold text-gray-600">
-                                @forelse($healthCenters as $key => $healthCenter)
+                                @forelse($managers as $key => $manager)
                                 <tr>
                                     <!--begin::ID-->
                                     <td>
-                                        {{ $healthCenters->firstItem() + $key }}
+                                        {{ $managers->firstItem() + $key }}
                                     </td>
                                     <!--end::ID-->
                                     <!--begin::Name-->
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-50px me-3">
-                                                <div class="symbol-label bg-light-success">
-                                                    <i class="ki-duotone ki-hospital fs-2 text-success">
+                                                <div class="symbol-label bg-light-info">
+                                                    <i class="ki-duotone ki-profile-user fs-2 text-info">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                        <span class="path4"></span>
                                                     </i>
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <span class="text-gray-800 fw-bold fs-6">{{ $healthCenter->name }}</span>
-                                                <span class="text-muted fs-7">{{ $healthCenter->registration_number }}</span>
+                                                <span class="text-gray-800 fw-bold fs-6">{{ $manager->full_name }}</span>
+                                                <span class="text-muted fs-7">{{ $manager->national_id }}</span>
                                             </div>
                                         </div>
                                     </td>
                                     <!--end::Name-->
-                                    <!--begin::Location-->
+                                    <!--begin::Email-->
                                     <td>
-                                        <div class="d-flex flex-column">
-                                            <span class="text-gray-800 fw-bold">{{ $healthCenter->governorate->name ?? 'غير محدد' }}</span>
-                                            <span class="text-muted fs-7">{{ $healthCenter->city->name ?? 'غير محدد' }}</span>
-                                        </div>
+                                        <span class="text-gray-800">{{ $manager->email ?? 'غير محدد' }}</span>
                                     </td>
-                                    <!--end::Location-->
+                                    <!--end::Email-->
                                     <!--begin::Phone-->
                                     <td>
-                                        <span class="text-gray-800">{{ $healthCenter->phone }}</span>
+                                        <span class="text-gray-800">{{ $manager->phone }}</span>
                                     </td>
                                     <!--end::Phone-->
-                                    <!--begin::Available Doses-->
+                                    <!--begin::Health Center-->
                                     <td>
-                                        <span class="badge badge-light-{{ $healthCenter->available_doses > 0 ? 'success' : 'danger' }}">
-                                            {{ $healthCenter->available_doses }} جرعة
-                                        </span>
-                                    </td>
-                                    <!--end::Available Doses-->
-                                    <!--begin::Manager-->
-                                    <td>
-                                        @if($healthCenter->manager)
-                                            <span class="text-gray-800">{{ $healthCenter->manager->full_name }}</span>
+                                        @if($manager->healthCenter)
+                                            <div class="d-flex flex-column">
+                                                <span class="text-gray-800 fw-bold">{{ $manager->healthCenter->name }}</span>
+                                                <span class="text-muted fs-7">{{ $manager->healthCenter->governorate->name ?? '' }}</span>
+                                            </div>
                                         @else
                                             <span class="badge badge-light-warning">غير مُعين</span>
                                         @endif
                                     </td>
-                                    <!--end::Manager-->
+                                    <!--end::Health Center-->
                                     <!--begin::Status-->
                                     <td>
-                                        @if($healthCenter->is_active)
+                                        @if($manager->is_verified)
                                             <span class="badge badge-light-success">نشط</span>
                                         @else
                                             <span class="badge badge-light-danger">غير نشط</span>
                                         @endif
                                     </td>
                                     <!--end::Status-->
+                                    <!--begin::Created Date-->
+                                    <td>
+                                        {{ $manager->created_at ? $manager->created_at->format('Y-m-d') : '-' }}
+                                    </td>
+                                    <!--end::Created Date-->
                                     <!--begin::Action-->
                                     <td class="text-end">
                                         <a href="#" class="btn btn-sm btn-light btn-active-light-primary btn-flex btn-center" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -215,21 +177,31 @@
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="{{ route('admin.health-centers.show', $healthCenter->id) }}" class="menu-link px-3">
+                                                <a href="{{ route('admin.health-center-managers.show', $manager->id) }}" class="menu-link px-3">
                                                     عرض
                                                 </a>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="{{ route('admin.health-centers.edit', $healthCenter->id) }}" class="menu-link px-3">
+                                                <a href="{{ route('admin.health-center-managers.edit', $manager->id) }}" class="menu-link px-3">
                                                     تعديل
                                                 </a>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 text-danger" onclick="deleteHealthCenter({{ $healthCenter->id }})">
+                                                <form action="{{ route('admin.health-center-managers.toggle-status', $manager->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    <button type="submit" class="menu-link px-3 border-0 bg-transparent text-start w-100">
+                                                        {{ $manager->is_active ? 'تعطيل' : 'تفعيل' }}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" class="menu-link px-3 text-danger" onclick="deleteManager({{ $manager->id }})">
                                                     حذف
                                                 </a>
                                             </div>
@@ -247,7 +219,7 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                             </i>
-                                            <span class="text-gray-400 fs-6">لا توجد وحدات صحية</span>
+                                            <span class="text-gray-400 fs-6">لا توجد مديرين للوحدات الصحية</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -259,9 +231,9 @@
                     <!--end::Table-->
 
                     <!--begin::Pagination-->
-                    @if($healthCenters->hasPages())
+                    @if($managers->hasPages())
                     <div class="d-flex justify-content-center">
-                        {{ $healthCenters->links() }}
+                        {{ $managers->links() }}
                     </div>
                     @endif
                     <!--end::Pagination-->
@@ -283,10 +255,10 @@
 
 @section('scripts')
 <script>
-function deleteHealthCenter(id) {
+function deleteManager(id) {
     Swal.fire({
         title: 'هل أنت متأكد؟',
-        text: "سيتم حذف هذه الوحدة الصحية نهائياً!",
+        text: "سيتم حذف هذا المدير نهائياً!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
@@ -297,17 +269,17 @@ function deleteHealthCenter(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             const form = document.getElementById('delete-form');
-            form.action = `/admin/health-centers/${id}`;
+            form.action = `/admin/health-center-managers/${id}`;
             form.submit();
         }
     });
 }
 
 // Search functionality
-document.querySelector('[data-kt-health-center-table-filter="search"]').addEventListener('keyup', function(e) {
+document.querySelector('[data-kt-customer-table-filter="search"]').addEventListener('keyup', function(e) {
     const searchText = e.target.value.toLowerCase();
-    const tableRows = document.querySelectorAll('#kt_health_centers_table tbody tr');
-    
+    const tableRows = document.querySelectorAll('#kt_customers_table tbody tr');
+
     tableRows.forEach(row => {
         const text = row.textContent.toLowerCase();
         if (text.includes(searchText)) {
